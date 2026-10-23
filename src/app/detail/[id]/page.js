@@ -5,7 +5,6 @@ import { useParams, useRouter } from "next/navigation";
 import { Header } from "../../features/Header";
 import { Footer } from "../../features/Footer";
 
-const api_token = process.env.NEXT_PUBLIC_TMDB_API_TOKEN;
 const IMG_BASE = "https://image.tmdb.org/t/p/w500";
 const BACKDROP_BASE = "https://image.tmdb.org/t/p/w1280";
 const REGION = "US";
@@ -100,16 +99,11 @@ export default function MovieDetail() {
 
         const fetchDetail = async () => {
             const [movieRes, providersRes, videosRes] = await Promise.all([
-                fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, {
-                    headers: { Authorization: `Bearer ${api_token}` },
-                }),
+                fetch(`/api/tmdb/movie/${id}?language=en-US`),
                 fetch(
-                    `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
-                    { headers: { Authorization: `Bearer ${api_token}` } }
+                    `/api/tmdb/movie/${id}/watch/providers`
                 ),
-                fetch(`https://api.themoviedb.org/3/movie/${id}/videos`, {
-                    headers: { Authorization: `Bearer ${api_token}` },
-                }),
+                fetch(`/api/tmdb/movie/${id}/videos`),
             ]);
 
             if (!movieRes.ok) {

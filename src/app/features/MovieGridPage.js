@@ -5,7 +5,6 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { MovieCard } from "./MovieCard";
 
-const api_token = process.env.NEXT_PUBLIC_TMDB_API_TOKEN;
 
 // Shared layout for any paginated TMDB list (category, search, genre).
 // `endpoint` is a TMDB path + query string without the page param.
@@ -21,9 +20,7 @@ export const MovieGridPage = ({ title, endpoint }) => {
         if (!endpoint) return;
 
         const separator = endpoint.includes("?") ? "&" : "?";
-        fetch(`https://api.themoviedb.org/3${endpoint}${separator}page=${page}`, {
-            headers: { Authorization: `Bearer ${api_token}` },
-        })
+        fetch(`/api/tmdb${endpoint}${separator}page=${page}`)
             .then((response) => {
                 if (!response.ok) throw new Error("TMDB request failed");
                 return response.json();

@@ -30,4 +30,4 @@ A movie browsing app built with Next.js and the [TMDB API](https://developer.the
 
 ## Deploying
 
-On Vercel (or any host), add `NEXT_PUBLIC_TMDB_API_TOKEN` as an environment variable before building.
+On Vercel (or any host), add `TMDB_API_TOKEN` as an environment variable before building.

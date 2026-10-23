@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const api_token = process.env.NEXT_PUBLIC_TMDB_API_TOKEN;
 const BACKDROP_BASE = "https://image.tmdb.org/t/p/original";
 const SLIDE_COUNT = 6;
 const AUTOPLAY_MS = 6000;
@@ -19,8 +18,7 @@ export const HeroSection = () => {
     const getMovies = async () => {
       try {
         const response = await fetch(
-          "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
-          { headers: { Authorization: `Bearer ${api_token}` } }
+          "/api/tmdb/movie/popular?language=en-US&page=1"
         );
         const jsonData = await response.json();
         setMovies((jsonData.results || []).slice(0, SLIDE_COUNT));
@@ -61,8 +59,7 @@ export const HeroSection = () => {
     }
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US`,
-        { headers: { Authorization: `Bearer ${api_token}` } }
+        `/api/tmdb/movie/${movie.id}/videos?language=en-US`
       );
       const jsonData = await response.json();
       const results = jsonData.results || [];

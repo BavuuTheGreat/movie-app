@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-const api_token = process.env.NEXT_PUBLIC_TMDB_API_TOKEN;
 const IMG_BASE = "https://image.tmdb.org/t/p/w500";
 
 export const Popular = () => {
@@ -12,12 +11,7 @@ export const Popular = () => {
 
     const getData = async () => {
         const response = await fetch(
-            "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
-            {
-                headers: {
-                    Authorization: `Bearer ${api_token}`,
-                },
-            }
+            "/api/tmdb/movie/popular?language=en-US&page=1"
         );
 
         if (!response.ok) {
